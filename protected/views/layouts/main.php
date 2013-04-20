@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="he" lang="he" dir="rtl">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="he" />
+	
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- blueprint CSS framework -->
@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
         
         <!--  jquery mobile -->
-        <?php Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl."/css/rtl.jquery.mobile-1.3.0.css"); ?>
+        <?php //Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl."/css/rtl.jquery.mobile-1.3.0.css"); ?>
         <?php //Yii::app()->clientScript->registerCssFile(Yii::app()->request->baseUrl."/css/taxi.min.css"); ?>
         <?php Yii::app()->clientScript->registerCssFile("http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"); ?>
         <?php Yii::app()->clientScript->registerScriptFile("http://code.jquery.com/jquery-1.9.1.min.js"); ?>

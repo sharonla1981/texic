@@ -65,30 +65,29 @@ class RideController extends Controller
 		$model=new Ride;
                 
                 $taarif_types = Taarif::model()->findAll();
+                $sources = Source::model()->findAll();
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 
-		if(isset($_POST['ride_type']))
+		if(isset($_POST['textAmount']))
 		{
-			$selected_taarif_id=$_POST['ride_type'];
-                        $selected_taarif = Taarif::model()->findAllByPk($selected_taarif_id);
-                        $amount = $selected_taarif[0]['taarif'];
-                        
-                        $datetime = $_POST['datetime'];
+                        if (is_numeric($_POST['textAmount']))
+                        {
+                            $amount = $_POST['textAmount'];
+                        }
                         
                         $model->amount = $amount;
                         $model->start_time = $_POST['datetime'];
-                        $model->taarif_id = $selected_taarif_id;
-                        
-                        
+                        $model->source_id = $_POST['source_id'];
+                           
 			if($model->save()){
-                            //$this->redirect(array('view','id'=>$model->taarif->name));
+                            $this->redirect(array('create'/*,'id'=>$model->taarif->name*/));
                         }
 				
 		}
 
 		$this->render('create',array(
-			'model'=>$model,'taarif_types'=>$taarif_types
+			'model'=>$model,'taarif_types'=>$taarif_types,'sources'=>$sources,
 		));
 	}
 

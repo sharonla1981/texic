@@ -1,25 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "tbl_ride".
+ * This is the model class for table "tbl_source".
  *
- * The followings are the available columns in table 'tbl_ride':
+ * The followings are the available columns in table 'tbl_source':
  * @property integer $id
- * @property string $start_time
- * @property integer $taarif_id
- * @property double $amount
- * @property integer $source_id
- * @property string $create_time
- * @property integer $create_user_id
- * @property string $update_time
- * @property integer $update_user_id
+ * @property string $name
  */
-class Ride extends CActiveRecord
+class Source extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Ride the static model class
+	 * @return Source the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -31,7 +24,7 @@ class Ride extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_ride';
+		return 'tbl_source';
 	}
 
 	/**
@@ -42,12 +35,11 @@ class Ride extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('taarif_id, source_id, create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
-			array('amount', 'numerical'),
-			array('start_time, create_time, update_time', 'safe'),
+			array('name', 'required'),
+			array('name', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, start_time, taarif_id, amount, source_id, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,14 +61,7 @@ class Ride extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'start_time' => 'Start Time',
-			'taarif_id' => 'Taarif',
-			'amount' => 'Amount',
-			'source_id' => 'Source',
-			'create_time' => 'Create Time',
-			'create_user_id' => 'Create User',
-			'update_time' => 'Update Time',
-			'update_user_id' => 'Update User',
+			'name' => 'Name',
 		);
 	}
 
@@ -92,14 +77,7 @@ class Ride extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('start_time',$this->start_time,true);
-		$criteria->compare('taarif_id',$this->taarif_id);
-		$criteria->compare('amount',$this->amount);
-		$criteria->compare('source_id',$this->source_id);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('create_user_id',$this->create_user_id);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('update_user_id',$this->update_user_id);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

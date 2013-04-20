@@ -15,6 +15,7 @@
  */
 class User extends CActiveRecord
 {
+        public $repeat_password;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -42,12 +43,15 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('email', 'required'),
+                        array('email','unique'),
+                        array('password', 'compare', 'compareAttribute'=>'repeat_password'),
 			array('create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>256),
 			array('last_login_time, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, email, password, last_login_time, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+                    
 		);
 	}
 
@@ -69,8 +73,9 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'password' => 'Password',
+			'email' => 'דוא"ל',
+			'password' => 'סיסמה',
+                        'repeat_password' => 'סיסמה שוב',
 			'last_login_time' => 'Last Login Time',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -103,4 +108,16 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function afterValidate() 
+        {
+            parent::afterValidate();
+            
+            $this->password = $this->encrypt($this->password);
+        }
+        
+        public function encrypt($password)
+        {
+            return md5($password);
+        }
 }

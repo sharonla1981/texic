@@ -65,11 +65,13 @@ class UserController extends Controller
 		$model=new User;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
+                        
 			$model->attributes=$_POST['User'];
+                        
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -168,4 +170,6 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        //public function afterValidate()
 }
